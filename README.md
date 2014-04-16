@@ -3,7 +3,7 @@
 This plugin will install and configured mod_spdy for Apache and enable it.  There are currently no configuration options, so all you need to do is install the plugin and add this to your application manifest:
 
 <pre><code>
-  recipe :spdy
+recipe :spdy
 </code></pre>
 
 And that's it!
