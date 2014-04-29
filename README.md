@@ -15,3 +15,7 @@ If you're using moonshine_haproxy and have SSL enabled, you just need to add the
 ## Warning
 
 We've run into some issues with older clients (Net::HTTP in Ruby 1.9.3) not being able to request SSL URLs from sites with mod_spdy.  If you don't care about that, then feel free to use this plugin. If you SSL-protect your API or use something like Scout or nagios to monitor SSL-enabled URLs, you might want to hold off.
+
+## Copyright
+
+Unless otherwise specified, all content copyright &copy; 2014, [Rails Machine, LLC](http://railsmachine.com)
