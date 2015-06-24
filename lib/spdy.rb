@@ -42,21 +42,21 @@ module Spdy
     # dependencies for install
     package 'wget',                 :ensure => :installed
     package "apache2-threaded-dev", :ensure => :installed
-    
+
     file "/usr/local/src",          :ensure => :directory
 
-    arch = Facter.architecture
+    arch = Facter.value(:architecture)
     if arch == "x86_64"
       arch = "amd64"
     end
-    
+
     url = "https://dl-ssl.google.com/dl/linux/direct/mod-spdy-beta_current_#{arch}.deb"
-    
+
     exec 'download_spdy',
       :command => "wget #{url}",
       :cwd => "/usr/local/src",
       :unless => "test -f /usr/local/src/mod-spdy-beta_current_#{arch}.deb"
-    
+
     exec 'install_spdy',
       :command => [
         "dpkg --force-confold -i mod-spdy-beta_current_#{arch}.deb",
@@ -70,14 +70,14 @@ module Spdy
         exec('download_spdy')
       ],
       :unless => "dpkg -s mod-spdy-beta"
-    
+
 #    file "/etc/apache2/mods-available/spdy.conf",
 #      :ensure => :present,
 #      :content => template(File.join(File.dirname(__FILE__), '..', 'templates', 'spdy.conf.erb')),
 #      :require => [ exec('install_spdy') ],
 #      :notify => service('apache2'),
 #      :alias => "spdy_conf"
-    
+
     # a2enmod 'spdy', :require => [ exec('install_spdy'), file('spdy_conf') ]
     a2enmod 'spdy', :require => [ exec('install_spdy') ]
   end
